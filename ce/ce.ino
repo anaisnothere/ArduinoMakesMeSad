@@ -89,43 +89,31 @@ void loop()
 //---------------------------------------------------------------
 void printData()
 {
-  Serial.print(" CO2[");
+
+  Serial.println("co2,tvoc,temp,pressure,altitude,humidity!");
   Serial.print(myCCS811.getCO2());
-  Serial.println("]ppm");
-
-  Serial.print(" TVOC[");
+  Serial.print(",");
   Serial.print(myCCS811.getTVOC());
-  Serial.println("]ppb");
-
-  Serial.print(" temp[");
+  Serial.print(",");
   Serial.print(myBME280.readTempC(), 1);
-  Serial.println("]C");
-
+  Serial.print(",");
+  Serial.print(myBME280.readFloatPressure(), 2);
+  Serial.print(",");
+  Serial.print(myBME280.readFloatAltitudeMeters(), 2);
+  Serial.print(",");
+  Serial.print(myBME280.readFloatHumidity(), 0);
+  
+  Serial.println();
+  
   //Serial.print(" temp[");
   //Serial.print(myBME280.readTempF(), 1);
   //Serial.print("]F");
-
-  Serial.print(" pressure[");
-  Serial.print(myBME280.readFloatPressure(), 2);
-  Serial.println("]Pa");
-
   //Serial.print(" pressure[");
   //Serial.print((myBME280.readFloatPressure() * 0.0002953), 2);
   //Serial.print("]InHg");
-
-  Serial.print(" altitude[");
-  Serial.print(myBME280.readFloatAltitudeMeters(), 2);
-  Serial.println("]m");
-
   //Serial.print("altitude[");
   //Serial.print(myBME280.readFloatAltitudeFeet(), 2);
   //Serial.print("]ft");
-
-  Serial.print(" humidity[");
-  Serial.print(myBME280.readFloatHumidity(), 0);
-  Serial.println("]%");
-
-  Serial.println();
 }
 
 //printDriverError decodes the CCS811Core::status type and prints the
